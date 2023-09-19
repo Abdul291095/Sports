@@ -5,6 +5,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <style>
+        body{
+            background: #F4F5F6;
+        }
         .pagenation-icon span svg{
             width: 22px;
             height: 22px;
@@ -21,7 +24,7 @@
         .table-con{
             box-shadow: 0rem 0.5rem 2rem 0rem rgba(35, 44, 59, 0.1);
             border: 1px solid #CCCCCC;
-            overflow: hidden;
+            overflow: auto;
             border-radius: 10px;
             margin: 10px 20px 20px;
         }
@@ -30,26 +33,64 @@
         }
         .table-con img{
             width: 50px;
-        height: 50px;       
-    }
-    .table-con table tbody tr:hover{
-        background: #fff6f8
-    }
-    .table-con thead{
-        background: #cfcfcf;
-        border-radius: 5px;
-    }
-    .form-container form{
-        margin: 20px 20px 10px;
-    }
-    .pagenation-icon nav .hidden{
-        display: flex;
-        justify-content: space-between;
-    }
-    .page-title{
-        text-align: center;
-        margin: 10px auto;
-    }
+            height: 50px;    
+            object-fit: cover;   
+        }
+        input[type='file']{
+            padding: 15px;
+            border: 1px dashed #BBB;
+            border-radius: 6px;
+        }
+        .table-con table tbody tr:hover{
+            background: #fff6f8
+        }
+        .table-con thead{
+            
+            border-radius: 5px;
+        }
+        .form-container form{
+            margin: 20px 20px 0px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #EEE;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .pagenation-icon nav .hidden{
+            display: flex;
+            justify-content: space-between;
+        }
+        @media (max-width: 768px){
+            .pagenation-icon nav .hidden{
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+        }
+        .pagenation-icon nav .hidden .relative {
+            display: flex;
+            align-items: center;
+        }
+        .pagenation-icon nav .hidden .relative span span,
+        .pagenation-icon nav .hidden a{
+            text-decoration: none;
+            padding: 0 !important;;
+            aspect-ratio: 1;
+            text-decoration: none;
+            width: 35px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .pagenation-icon nav .hidden span[aria-current="page"] span{
+            color: #FFFFFF;
+            background-color: #0d6efd !important;
+        }
+        .page-title{
+            text-align: center;
+            margin: 10px auto;
+        }
     </style>
 </head>
 
@@ -59,12 +100,14 @@
         <form action="/upload" method="post" enctype="multipart/form-data">
             @csrf
             <input type="file" name="file" required accept="xlsx,xls">
-            <button type="submit" class="btn btn-success" >Upload</button>
+            <button type="submit" class="btn btn-secondary" >Upload</button>
         </form>
     </div>
-    <div class="container form-container">      
-        <a href="{{ route('users.list') }}" class="btn btn-success">Users list</a>
-    </div>
+    @if(Request::is('upload'))
+        <div class="container form-container">      
+            <a href="{{ route('users.list') }}" class="btn btn-success">Users list</a>
+        </div>
+    @endif
     @if(Request::is('upload'))
         <h3 class="page-title text-primary">Users</h3>
     @else
@@ -84,17 +127,17 @@
         <div class="table-con">
         <table class="table table-bordered">
             <thead>
-                <tr>
-                    <th>First Name</th>
-                    <th>Middle Name</th>
-                    <th>Last Name</th>
-                    <th>Date of Birth</th>
-                    <th>Mobile Number</th>
-                    <th>Father Full Name</th>
-                    <th>State</th>
-                    <th>City</th>
-                    <th>Address</th>
-                    <th>Profile Photo</th>
+                <tr class="bg-primary">
+                    <th class="text-white">First Name</th>
+                    <th class="text-white">Middle Name</th>
+                    <th class="text-white">Last Name</th>
+                    <th class="text-white">Date of Birth</th>
+                    <th class="text-white">Mobile Number</th>
+                    <th class="text-white">Father Full Name</th>
+                    <th class="text-white">State</th>
+                    <th class="text-white">City</th>
+                    <th class="text-white">Address</th>
+                    <th class="text-white">Profile Photo</th>
                 </tr>
             </thead>
             <tbody>

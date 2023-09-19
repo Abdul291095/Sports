@@ -14,6 +14,8 @@ This task is used to uploading user's records by Excel sheet file and show the u
 
 - You can check the list of users with the help of User List button
 
+
+### Note:
 - To avoid the bulk Imports, the maximum number of rows per Excel file is limited to 100
 
 ## Getting Started

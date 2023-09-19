@@ -23,10 +23,6 @@ class UserController extends Controller
         try 
         {
 
-            // $request->validate([
-            //     'file' => 'required|mimes:xls,xlsx',
-            // ]);
-            
             $file = $request->file('file');
             
             $allowedExtensions = ['xls', 'xlsx'];
